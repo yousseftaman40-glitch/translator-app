@@ -20,44 +20,43 @@ sendbtn.addEventListener("click",async (e)=>{
         to = "en"
         message = arabic.value 
     }
+    sendbtn.textContent = "..."
 
+    try {
+        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(message)}&langpair=${from}|${to}`;
 
+        const res = await fetch(url);
 
-    try{
-        const res = await fetch("https://libretranslate.com/translate", {
-        method: "POST",
-        body: JSON.stringify({
-            q: message,
-            source: from,
-            target: to,
-            format: "text",
-            alternatives: 3,
-            api_key: ""
-        }),
-            headers: { "Content-Type": "application/json" }
-        });
-        if (!res.ok) throw new Error("Translation request failed");
+        if (!res.ok) throw new Error("Failed to translate");
 
+        const result = await res.json();
 
-        const result = await res.json()
-        if(result.translatedText){
-            if(english.value !== ""){
-                arabic.value = result.translatedText
-            }else if(arabic.value !== ""){
-                english.value = result.translatedText
+        if (result.responseStatus === 200) {
+            if (english.value !== "") {
+                arabic.value = result.responseData.translatedText;
+            } else {
+                english.value = result.responseData.translatedText;
             }
+        } else {
+            throw new Error(result.responseDetails);
         }
-        else{
-            throw new Error("sorry we cannot translate this!🙏");
-        }
-    }catch(err){
-        english.value == ""? english.value = err : arabic.value = err 
+
+    } catch (err) {
+        alert(err.message);
     }
-    
-    
-
-
+    sendbtn.textContent = "➤"
 })
+english.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        sendbtn.click();
+    }
+});
+
+arabic.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        sendbtn.click();
+    }
+});
 
 
 
