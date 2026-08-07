@@ -1,39 +1,133 @@
-*{
+* {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-}
-body{
-    background-color:  #8d9091;
+    font-family: "Segoe UI", sans-serif;
 }
 
-.mainapp{
-    display:flex;
-    flex-direction: column; 
-    justify-content: space-between;
-    
+body {
+    background: linear-gradient(135deg, #667eea, #764ba2);
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.english, .arabic{
-    background-color:#161616;
-    border: none;
+
+.mainapp {
+    width: 90%;
+    max-width: 900px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 22px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+}
+
+
+/* text areas */
+.english,
+.arabic {
+
     outline: none;
-    height: 49%;
-    padding: 5px;
+
     width: 100%;
-    font-size: 50px;
-    color: white;
+    height: 45%;
+
+    padding: 20px;
+    resize: none;
+
+    font-size: 32px;
+    color: rgb(46, 46, 46);
+
+    background: rgba(241, 240, 240, 0.10);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+
+
+    box-shadow: 0 15px 30px rgba(0,0,0,.3);
+    transition: .3s;
 }
+
+
+.english:focus,
+.arabic:focus {
+    border-color: #8b9cff;
+    box-shadow: 0 3px 30px rgba(18, 18, 18, 0.4)
+}
+
+/* button */
 .send {
-    width: 3rem;
-    height: 3rem;
-    background-color: #dfdff5;
-    outline: 0;
-    border: 0;
-    border-radius: 3px;
-    margin: auto;
+    width: 65px;
+    height: 70px;
+
+
+    color: rgba(255, 255, 255, 0.85);
+
+    border: none;
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    font-size: 25px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 15px rgba(0,0,0,.1);
+
+    transition: .3s;
 }
-.send:hover{
-    background-color:#c6c6d9 ;
+input::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.send:hover {
+    transform: translateY(-5px);
+}
+.send:hover::after {
+    content: "";
+    position: absolute;
+    bottom: 73%;
+    left: 40%;
+    width: 1px;
+    transform: translateX(-50%);
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.12);    
+}
+
+
+.send:active {
+    transform: scale(.9);
+}
+
+@media(max-width:600px){
+
+    .mainapp{
+        width:95%;
+        height:95vh;
+        padding:15px;
+    }
+
+
+    .english,
+    .arabic{
+        font-size:35px;
+        padding:15px;
+    }
+
 }
